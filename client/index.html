@@ -1,0 +1,26 @@
+<div id="sign-in-container" style="display:none;">
+  Username: <input id="sign-username" type="text"></input>
+  Password: <input id="sign-password" type="text"></input>
+  <button id="sign-in-button">Sign In></button>
+  <button id="sign-up-button">Sign Up></button>
+</div>
+
+<div id="game-stats" style="display:inline-block;">
+</div>
+
+<div id="game" style="display:inline-block;">
+  <canvas id="ctx" width="500" height="500" style="border:1px solid #000;"></canvas>
+
+  <div id="chat-text" style="width:500x; height:100px;overflow-y:scroll;">
+  </div>
+
+  <form id="chat-form">
+    <input id="chat-input" style="width:500px"></input>
+  </form>
+</div>
+
+<script src="socket.io/socket.io.js"></script>
+<script> var socket = io(); </script>
+<script src="client/js/sign-in.js"></script>
+<script src="client/js/game.js"></script>
+<script src="client/js/chat.js"></script>
