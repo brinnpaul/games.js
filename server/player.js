@@ -14,6 +14,7 @@ function Player(object) {
   this.maxSpeed = 10
   this.health = 100
   this.maxHealth = 100
+  this.currentWeapon = Player._weapons.bullet
 }
 
 Player.prototype = Object.create(Entity.prototype)
@@ -41,9 +42,9 @@ Player.prototype.updateSpeed = function() {
   else this.speedy = 0
 }
 
-Player.prototype.shootWeapon = function(type) {
+Player.prototype.shootWeapon = function() {
   if (this.attack) {
-    let Weapon = Player._weapons[type]
+    let Weapon = this.currentWeapon
     let shot = new Weapon(this.id, this.mouseAngle)
     shot.x = this.x
     shot.y = this.y
@@ -57,10 +58,16 @@ Player.prototype.update = function() {
   this.shootWeapon('bomb')
 }
 
+Player.prototype.setCurrentWeapon = function(type) {
+  console.log(type, 'hitting here')
+  this.currentWeapon = Player._weapons[type]
+}
+
 Player.onConnect = function(socket, name) {
     let player = new Player({socket:socket, name:name})
     Player.add(player)
 
+    // movement & firing
     socket.on('keyPress', (data) => {
       switch(data.input) {
         case 'right':
@@ -80,7 +87,13 @@ Player.onConnect = function(socket, name) {
           break
         case 'mouseAngle':
           player.mouseAngle = data.state
+          break
       }
+    })
+
+    socket.on('changeWeapon', (data) => {
+      console.log(data)
+      player.setCurrentWeapon(data.type)
     })
 
 }

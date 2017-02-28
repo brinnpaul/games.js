@@ -42,6 +42,14 @@ document.onkeydown = (e) => {
       input:'up',
       state:true
     });
+  } else if (e.keyCode === 49) {
+    socket.emit('changeWeapon', {
+      type:'bullet'
+    });
+  } else if (e.keyCode === 50){
+    socket.emit('changeWeapon', {
+      type:'bomb'
+    });
   }
 }
 
@@ -90,5 +98,5 @@ document.onmousemove = (e) => {
   socket.emit('keyPress', {
     input: 'mouseAngle',
     state: angle
-  })
+  });
 }

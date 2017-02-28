@@ -11,7 +11,7 @@ let Bullet = require('./server/weapons/bullet')
 let Bomb = require('./server/weapons/bomb')
 
 Socket.initialize({list: {}})
-Player.initialize({list: {}, bomb:Bomb})
+Player.initialize({list: {}, bomb:Bomb, bullet:Bullet})
 Bullet.initialize({list: {}, player:Player})
 Bomb.initialize({list:{}, bullet:Bullet})
 
